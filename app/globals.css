@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-paper: #FAF9F5;
+    --color-charcoal: #181818;
+    --color-coral: #F45152;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: #FAF9F5;
+    color: #181818;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: #F45152;
+    color: #FFFFFF;
+  }
+
+  body {
+    background-color: #FAF9F5;
+    color: #181818;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+  }
+}
+
+/* Subtle paper texture overlay */
+.paper-grain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.038;
+  background-image: url('/assets/noise.svg');
+  background-repeat: repeat;
+  mix-blend-mode: multiply;
+}
+
+/* Editorial display typography helper */
+.font-editorial-condensed {
+  font-family: var(--font-display), "Bebas Neue", "Anton", Impact, sans-serif;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  line-height: 0.92;
+}
+
+.font-handwritten {
+  font-family: var(--font-hand), cursive;
+}
+
+/* Subtle card hover elevation */
+.card-editorial {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+}
+
+.card-editorial:hover {
+  transform: translateY(-4px) rotate(0deg) !important;
+  box-shadow: 0 20px 40px -15px rgba(244, 81, 82, 0.12), 0 10px 25px -10px rgba(0, 0, 0, 0.08);
+  border-color: rgba(244, 81, 82, 0.35);
+}
+
+/* Custom interactive button */
+.btn-coral {
+  background-color: #F45152;
+  color: #FFFFFF;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-coral:hover {
+  background-color: #E0383A;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px -6px rgba(244, 81, 82, 0.45);
+}
+
+.btn-coral:active {
+  transform: translateY(0);
+}
+
+/* Subtle hand-drawn stroke animation */
+@keyframes drawStroke {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
