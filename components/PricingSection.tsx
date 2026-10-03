@@ -2,6 +2,7 @@
 
 import React from "react";
 import { CONTENT } from "@/config/content";
+import { PRODUCT } from "@/config/product";
 import { trackEvent } from "@/config/analytics";
 import {
   ArrowRight,
@@ -9,6 +10,8 @@ import {
   ShieldCheck,
   Sparkles,
   Lock,
+  Timer,
+  Zap,
 } from "lucide-react";
 
 interface PricingSectionProps {
@@ -39,13 +42,14 @@ export default function PricingSection({ onOpenCheckout }: PricingSectionProps) 
 
         {/* Pricing Card */}
         <div className="max-w-md mx-auto bg-paper-white rounded-3xl border-2 border-coral shadow-floating p-8 text-left relative overflow-hidden">
-          {/* Badge */}
+          {/* Badge & Urgency Pill */}
           <div className="flex items-center justify-between pb-4 border-b border-editorial-border/60 mb-6">
-            <span className="text-xs font-mono font-bold uppercase text-coral">
-              ALL-IN-ONE ACCESS
+            <span className="text-xs font-mono font-bold uppercase text-coral flex items-center gap-1">
+              <Zap className="w-3.5 h-3.5 fill-current" />
+              LIMITED TIME OFFER
             </span>
-            <span className="text-xs font-mono font-bold bg-coral text-white px-2.5 py-0.5 rounded">
-              Launch Price
+            <span className="text-xs font-mono font-bold bg-gradient-to-r from-coral to-amber-500 text-white px-2.5 py-0.5 rounded shadow-xs">
+              7-Hour Launch Price
             </span>
           </div>
 
@@ -53,9 +57,18 @@ export default function PricingSection({ onOpenCheckout }: PricingSectionProps) 
             Salary Worth & Negotiation Playbook
           </h3>
 
-          <div className="flex items-baseline gap-2 mb-6">
-            <span className="font-mono text-5xl font-black text-charcoal">₹299</span>
-            <span className="text-xs font-semibold text-charcoal-light">One-time payment</span>
+          {/* Strikethrough Price Cut */}
+          <div className="flex flex-wrap items-baseline gap-3 mb-6">
+            <span className="text-xs font-mono uppercase text-editorial-grey font-bold">Was:</span>
+            <span className="line-through text-editorial-grey font-mono text-2xl font-bold">
+              {PRODUCT.originalPrice}
+            </span>
+            <span className="font-mono text-5xl font-black text-charcoal">
+              {PRODUCT.price}
+            </span>
+            <span className="bg-emerald-100 text-emerald-800 text-xs px-2 py-0.5 rounded font-mono font-bold">
+              {PRODUCT.discountPercent}
+            </span>
           </div>
 
           <ul className="space-y-3 mb-8 text-xs sm:text-sm font-semibold text-charcoal">
@@ -79,13 +92,18 @@ export default function PricingSection({ onOpenCheckout }: PricingSectionProps) 
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
               <span>Complete 10-Scenario Script Pack</span>
             </li>
+            <li className="flex items-center gap-2.5">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span>Priority Access to Upcoming Calculator</span>
+            </li>
           </ul>
 
+          {/* Enhanced Gradient Button with White Sheen */}
           <button
             onClick={handleCta}
-            className="w-full btn-coral py-4 rounded-xl text-base font-extrabold uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg group mb-3"
+            className="w-full btn-coral-gradient py-4 rounded-2xl text-base font-extrabold uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl group mb-3"
           >
-            <span>Get Instant Access — ₹299</span>
+            <span>GET INSTANT ACCESS — ₹299</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
 

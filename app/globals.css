@@ -70,28 +70,65 @@
   border-color: rgba(244, 81, 82, 0.35);
 }
 
-/* Custom interactive button */
-.btn-coral {
-  background-color: #F45152;
+/* High-Converting Gradient Button with White Sheen Highlight */
+.btn-coral,
+.btn-coral-gradient {
+  background: linear-gradient(135deg, #FF6667 0%, #F45152 48%, #DC2C2E 100%);
   color: #FFFFFF;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5), 0 10px 24px -6px rgba(244, 81, 82, 0.45);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.btn-coral:hover {
-  background-color: #E0383A;
+.btn-coral::before,
+.btn-coral-gradient::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.28) 50%,
+    transparent 100%
+  );
+  transition: left 0.75s ease-in-out;
+  pointer-events: none;
+}
+
+.btn-coral:hover::before,
+.btn-coral-gradient:hover::before {
+  left: 100%;
+}
+
+.btn-coral:hover,
+.btn-coral-gradient:hover {
+  background: linear-gradient(135deg, #FF7879 0%, #FA4042 50%, #C91D1F 100%);
   transform: translateY(-2px);
-  box-shadow: 0 12px 25px -6px rgba(244, 81, 82, 0.45);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.65), 0 16px 32px -6px rgba(244, 81, 82, 0.6);
 }
 
-.btn-coral:active {
+.btn-coral:active,
+.btn-coral-gradient:active {
   transform: translateY(0);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25), 0 6px 16px -4px rgba(244, 81, 82, 0.4);
 }
 
-/* Subtle hand-drawn stroke animation */
-@keyframes drawStroke {
-  to {
-    stroke-dashoffset: 0;
-  }
+/* 3D Perspective Card Container */
+.perspective-card {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.tilt-3d {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tilt-3d:hover {
+  transform: rotateY(-3deg) rotateX(4deg) translateZ(10px);
 }
 
 /* Reduced motion accessibility */

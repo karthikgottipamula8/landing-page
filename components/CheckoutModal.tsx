@@ -16,6 +16,7 @@ import {
   CheckCircle2,
   Sparkles,
   Loader2,
+  Zap,
 } from "lucide-react";
 
 interface CheckoutModalProps {
@@ -75,7 +76,6 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
   };
 
   const handleDirectRazorpay = () => {
-    // If the creator configures an active Razorpay page, open it
     const targetUrl =
       PRODUCT.checkoutUrl !== "CHECKOUT_URL_HERE"
         ? PRODUCT.checkoutUrl
@@ -92,9 +92,12 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
         {/* Header */}
         <div className="p-5 sm:p-6 bg-charcoal text-paper flex items-center justify-between border-b border-white/10 shrink-0">
           <div>
-            <span className="text-[10px] font-mono uppercase tracking-widest text-coral font-bold block">
-              SECURE CHECKOUT
-            </span>
+            <div className="flex items-center gap-1.5 mb-1">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-amber-300 font-bold flex items-center gap-1">
+                <Zap className="w-3 h-3 fill-current" />
+                7-HOUR LAUNCH DEAL
+              </span>
+            </div>
             <h3 className="font-editorial-condensed text-2xl sm:text-3xl text-white">
               GET THE SALARY PLAYBOOK
             </h3>
@@ -110,20 +113,25 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
 
         {/* Content Body */}
         <div className="p-5 sm:p-6 overflow-y-auto space-y-5">
-          {/* Order Summary Box */}
+          {/* Order Summary Box with Price Cut */}
           <div className="p-4 rounded-2xl bg-paper-cream border border-editorial-border">
             <div className="flex items-center justify-between mb-2">
               <span className="font-bold text-sm text-charcoal">
                 {PRODUCT.name}
               </span>
-              <span className="font-mono text-lg font-black text-coral">
-                {PRODUCT.price}
-              </span>
+              <div className="flex items-baseline gap-2">
+                <span className="line-through text-editorial-grey font-mono text-xs font-bold">
+                  {PRODUCT.originalPrice}
+                </span>
+                <span className="font-mono text-xl font-black text-coral">
+                  {PRODUCT.price}
+                </span>
+              </div>
             </div>
             <ul className="text-xs text-charcoal-light space-y-1 mb-2">
               <li className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                <span>Instant Digital PDF Access</span>
+                <span>Master Executive PDF Guide</span>
               </li>
               <li className="flex items-center gap-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
@@ -136,7 +144,7 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
             </ul>
             <div className="text-[11px] font-mono text-editorial-grey pt-2 border-t border-editorial-border/60 flex items-center justify-between">
               <span>One-Time Payment</span>
-              <span>Zero Hidden Charges</span>
+              <span className="text-emerald-700 font-bold">You Save ₹400</span>
             </div>
           </div>
 
@@ -166,7 +174,7 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
               <label className="block text-xs font-bold uppercase tracking-wider text-charcoal mb-1">
                 Email Address <span className="text-coral">*</span>
                 <span className="text-[10px] text-editorial-grey font-normal lowercase ml-1">
-                  (for instant delivery & backup links)
+                  (for instant download & backup receipt)
                 </span>
               </label>
               <input
@@ -183,7 +191,7 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
               <label className="block text-xs font-bold uppercase tracking-wider text-charcoal mb-1">
                 Phone / WhatsApp Number
                 <span className="text-[10px] text-editorial-grey font-normal ml-1">
-                  (optional for SMS receipt)
+                  (optional for WhatsApp receipt)
                 </span>
               </label>
               <input
@@ -206,7 +214,7 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
                   onClick={() => setPaymentMethod("upi")}
                   className={`p-2.5 rounded-xl border text-xs font-bold flex flex-col items-center gap-1 transition-all ${
                     paymentMethod === "upi"
-                      ? "bg-coral/10 border-coral text-coral"
+                      ? "bg-coral/10 border-coral text-coral shadow-xs"
                       : "bg-paper-cream border-editorial-border text-charcoal-light"
                   }`}
                 >
@@ -219,7 +227,7 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
                   onClick={() => setPaymentMethod("card")}
                   className={`p-2.5 rounded-xl border text-xs font-bold flex flex-col items-center gap-1 transition-all ${
                     paymentMethod === "card"
-                      ? "bg-coral/10 border-coral text-coral"
+                      ? "bg-coral/10 border-coral text-coral shadow-xs"
                       : "bg-paper-cream border-editorial-border text-charcoal-light"
                   }`}
                 >
@@ -232,7 +240,7 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
                   onClick={() => setPaymentMethod("netbanking")}
                   className={`p-2.5 rounded-xl border text-xs font-bold flex flex-col items-center gap-1 transition-all ${
                     paymentMethod === "netbanking"
-                      ? "bg-coral/10 border-coral text-coral"
+                      ? "bg-coral/10 border-coral text-coral shadow-xs"
                       : "bg-paper-cream border-editorial-border text-charcoal-light"
                   }`}
                 >
@@ -242,11 +250,11 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
               </div>
             </div>
 
-            {/* Primary Submit Button */}
+            {/* Primary Submit Button with Gradient */}
             <button
               type="submit"
               disabled={isProcessing}
-              className="w-full btn-coral py-3.5 rounded-xl text-sm font-extrabold uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg disabled:opacity-70 mt-2"
+              className="w-full btn-coral-gradient py-3.5 rounded-xl text-sm font-extrabold uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl disabled:opacity-70 mt-2"
             >
               {isProcessing ? (
                 <>

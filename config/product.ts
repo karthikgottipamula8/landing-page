@@ -11,15 +11,21 @@ export const PRODUCT = {
     "Find your realistic market salary. Calculate your negotiation range. Build your evidence. Know exactly what to say when asking HR for more.",
   creatorName: "Bhargavi Papolu",
   creatorRole: "Career Educator & Tech Mentor",
+  
+  // Pricing configuration with strike-through
+  originalPrice: "₹699",
+  originalPriceAlt: "₹599",
   price: "₹299",
   priceRaw: 299,
   currency: "INR",
   currencySymbol: "₹",
-  pricingType: "Launch Price • One-Time Purchase",
+  discountPercent: "57% OFF",
+  savingsAmount: "Save ₹400",
+  pricingType: "Limited Time Launch Price • One-Time Purchase",
+  timerHours: 7,
   format: "Instant Digital Access • 15 Worksheets & Frameworks • Complete HR Script Pack",
 
-  // Checkout URL placeholder as requested
-  // Replace "CHECKOUT_URL_HERE" with your actual Razorpay Payment Page URL
+  // Checkout URL placeholder
   checkoutUrl: "CHECKOUT_URL_HERE",
   razorpayPaymentPageUrl: "https://rzp.io/l/salary-worth-playbook",
 
