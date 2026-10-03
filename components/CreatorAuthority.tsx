@@ -17,7 +17,7 @@ export default function CreatorAuthority() {
   const { creatorSection } = CONTENT;
 
   return (
-    <section id="creator" className="py-20 md:py-28 bg-paper border-b border-editorial-border relative">
+    <section id="testimonials" className="py-14 sm:py-20 bg-paper border-b border-editorial-border relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">

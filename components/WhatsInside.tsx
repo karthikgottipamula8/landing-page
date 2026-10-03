@@ -19,7 +19,7 @@ export default function WhatsInside() {
   const { inside } = CONTENT;
 
   return (
-    <section id="inside" className="py-20 md:py-28 bg-paper-cream border-b border-editorial-border relative">
+    <section id="whats-inside" className="py-14 sm:py-20 bg-paper-cream border-b border-editorial-border relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">

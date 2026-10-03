@@ -1,27 +1,17 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import AnnouncementBar from "@/components/AnnouncementBar"; // 1. Announcement / value strip
-import Navbar from "@/components/Navbar"; // 2. Navigation
-import Hero from "@/components/Hero"; // 3. Above-the-fold Hero
-import ImmediateTrust from "@/components/ImmediateTrust"; // 4. Immediate trust / proof
-import CoreProblem from "@/components/CoreProblem"; // 5. Core problem
-import DifficultySection from "@/components/DifficultySection"; // 6. Why salary negotiation is difficult
-import MethodologySection from "@/components/MethodologySection"; // 7. The Salary Worth methodology
-import WhatsInside from "@/components/WhatsInside"; // 8. What is inside the playbook
-import ProductPreview from "@/components/ProductPreview"; // 9. Product preview
-import BonusScriptPack from "@/components/BonusScriptPack"; // 10. Bonus Script Pack
-import BeforeAfterSection from "@/components/BeforeAfterSection"; // 11. Before vs After
-import WhyDifferent from "@/components/WhyDifferent"; // 12. Why this system is different
-import CreatorAuthority from "@/components/CreatorAuthority"; // 13. Credibility / proof / Creator Feature
-import ValueStack from "@/components/ValueStack"; // 14. Offer / value stack
-import PricingSection from "@/components/PricingSection"; // 15. Pricing
-import TrustSection from "@/components/TrustSection"; // 16. Risk reversal / trust
-import FAQSection from "@/components/FAQSection"; // 17. FAQ
-import FinalCTA from "@/components/FinalCTA"; // 18. Final CTA
-import Footer from "@/components/Footer"; // 19. Footer
-import StickyMobileCTA from "@/components/StickyMobileCTA";
-import CheckoutModal from "@/components/CheckoutModal";
+import AnnouncementBar from "@/components/AnnouncementBar"; // 1. Top urgency & cart bar
+import Navbar from "@/components/Navbar"; // 2. Clean Navigation matching image
+import Hero from "@/components/Hero"; // 3. Hero featuring bhargavi-hero-banner.jpg first
+import WhatsInside from "@/components/WhatsInside"; // 4. What's Inside section
+import BenefitsSection from "@/components/BenefitsSection"; // 5. Benefits & Interactive CTC Slider
+import CreatorAuthority from "@/components/CreatorAuthority"; // 6. Bhargavi Papolu & Testimonials
+import PricingSection from "@/components/PricingSection"; // 7. Focused ₹299 purchase card
+import FAQSection from "@/components/FAQSection"; // 8. Direct conversion FAQs
+import Footer from "@/components/Footer"; // 9. Footer with social links matching image
+import StickyMobileCTA from "@/components/StickyMobileCTA"; // 10. Sticky bottom cart with ticking seconds
+import CheckoutModal from "@/components/CheckoutModal"; // 11. Instant Frictionless Checkout Modal
 import { trackEvent } from "@/config/analytics";
 
 export default function Home() {
@@ -42,67 +32,37 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen bg-paper text-charcoal pb-16 sm:pb-0">
-      {/* 1. Announcement / value strip */}
+      {/* 1. Announcement / Urgency Strip with 7-Hour Running Countdown */}
       <AnnouncementBar onOpenCheckout={openCheckout} />
 
-      {/* 2. Navigation */}
+      {/* 2. Navigation matching image: "Bhargavi Papolu" | What's Inside | Benefits | Testimonials | FAQ */}
       <Navbar onOpenCheckout={openCheckout} />
 
-      {/* 3. Hero (Above the fold) */}
+      {/* 3. Hero (FIRST ELEMENT: Features the approved graphic banner + instant ₹299 CTA) */}
       <Hero onOpenCheckout={openCheckout} />
 
-      {/* 4. Immediate trust / proof */}
-      <ImmediateTrust />
-
-      {/* 5. Core problem */}
-      <CoreProblem />
-
-      {/* 6. Why salary negotiation is difficult */}
-      <DifficultySection />
-
-      {/* 7. The Salary Worth methodology */}
-      <MethodologySection />
-
-      {/* 8. What is inside the playbook */}
+      {/* 4. What's Inside: Master Playbook (PDF), 15 Worksheets & HR Scripts */}
       <WhatsInside />
 
-      {/* 9. Product preview */}
-      <ProductPreview />
+      {/* 5. Benefits & Interactive 5-Number CTC Calculator */}
+      <BenefitsSection onOpenCheckout={openCheckout} />
 
-      {/* 10. Bonus Script Pack */}
-      <BonusScriptPack onOpenCheckout={openCheckout} />
-
-      {/* 11. Before vs After */}
-      <BeforeAfterSection />
-
-      {/* 12. Why this system is different */}
-      <WhyDifferent />
-
-      {/* 13. Credibility / proof / Creator Feature (Bhargavi Papolu live speaking & review) */}
+      {/* 6. Testimonials & Verified Mentor Authority (Bhargavi Papolu) */}
       <CreatorAuthority />
 
-      {/* 14. Offer / value stack */}
-      <ValueStack onOpenCheckout={openCheckout} />
-
-      {/* 15. Pricing */}
+      {/* 7. Buying Decision & Single ₹299 Pricing Card */}
       <PricingSection onOpenCheckout={openCheckout} />
 
-      {/* 16. Risk reversal / trust */}
-      <TrustSection />
-
-      {/* 17. FAQ */}
+      {/* 8. Direct conversion FAQ */}
       <FAQSection />
 
-      {/* 18. Final CTA */}
-      <FinalCTA onOpenCheckout={openCheckout} />
-
-      {/* 19. Footer */}
+      {/* 9. Footer with Social Channels matching the image & Legal Links */}
       <Footer onOpenCheckout={openCheckout} />
 
-      {/* Mobile Sticky Purchase Bar */}
+      {/* Floating Bottom Cart with Ticking Seconds Timer & Pink Gradient Title */}
       <StickyMobileCTA onOpenCheckout={openCheckout} />
 
-      {/* High-Converting Frictionless Checkout Modal */}
+      {/* Frictionless 1-Click Instant Checkout Modal */}
       <CheckoutModal isOpen={checkoutOpen} onClose={closeCheckout} />
     </main>
   );
