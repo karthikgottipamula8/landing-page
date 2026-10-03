@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { PRODUCT } from "@/config/product";
 import { trackEvent } from "@/config/analytics";
-import { ArrowRight, CheckCircle2, Zap, Timer, Lock, Sparkles } from "lucide-react";
+import { ArrowRight, CheckCircle2, Zap, Timer, Lock } from "lucide-react";
 import { useCountdownTimer } from "@/hooks/useCountdownTimer";
 
 interface HeroProps {
@@ -16,28 +16,28 @@ export default function Hero({ onOpenCheckout }: HeroProps) {
   const [btnHovered, setBtnHovered] = useState(false);
 
   const handleCta = () => {
-    trackEvent("hero_cta_click", { location: "hero_uncropped_overlay" });
+    trackEvent("hero_cta_click", { location: "hero_16_9_banner" });
     onOpenCheckout();
   };
 
   return (
-    <section className="relative pt-4 pb-12 sm:pt-8 sm:pb-16 bg-[#FAF9F5] border-b border-editorial-border overflow-hidden">
-      {/* Warm ambient radial glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[550px] bg-[#FF2A6D]/6 blur-[130px] rounded-full pointer-events-none" />
+    <section className="relative pt-4 pb-12 sm:pt-6 sm:pb-16 bg-[#FAF9F5] border-b border-editorial-border overflow-hidden">
+      {/* Subtle warm ambient radial glow */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[500px] bg-[#FF2A6D]/6 blur-[140px] rounded-full pointer-events-none" />
 
-      <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 relative z-10">
         {/* ========================================================================= */}
-        {/* 1. UNCROPPED HERO COMPOSITION WITH INTERACTIVE OVERLAYS                   */}
+        {/* 1. NATIVE 16:9 FORMAT HERO BANNER WITH INTERACTIVE OVERLAYS               */}
         {/* ========================================================================= */}
-        <div className="relative w-full aspect-square rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-2 border-editorial-border bg-[#FAF9F5] transition-all duration-300 hover:shadow-[0_20px_50px_rgba(244,81,82,0.18)]">
-          {/* Complete Uncropped Image in 100% Pristine Native Clarity */}
+        <div className="relative w-full aspect-[16/9] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-2 border-editorial-border bg-[#FAF9F5] transition-all duration-300 hover:shadow-[0_20px_50px_rgba(244,81,82,0.18)]">
+          {/* Complete 16:9 Banner in 100% Native Clarity */}
           <Image
-            src="/assets/bhargavi-hero-banner.jpg"
+            src="/assets/bhargavi-hero-banner-16-9.jpg"
             alt="Get Your Next Job Hike. You Deserve! By Bhargavi Papolu"
             fill
             priority
             quality={100}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 896px"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 95vw, 1152px"
             className="object-contain w-full h-full select-none"
           />
 
@@ -45,7 +45,7 @@ export default function Hero({ onOpenCheckout }: HeroProps) {
           {/* OVERLAY 1: Interactive CTA Button over "GET THE PLAYBOOK →"         */}
           {/* ------------------------------------------------------------------- */}
           <div
-            className="absolute left-[6.5%] top-[77.2%] w-[37.5%] h-[8%] z-30 cursor-pointer"
+            className="absolute left-[25.2%] top-[76.8%] w-[21.5%] h-[8.5%] z-30 cursor-pointer"
             onClick={handleCta}
             onMouseEnter={() => setBtnHovered(true)}
             onMouseLeave={() => setBtnHovered(false)}
@@ -53,96 +53,96 @@ export default function Hero({ onOpenCheckout }: HeroProps) {
             tabIndex={0}
             aria-label="Get The Playbook — ₹299"
           >
-            {/* Luminous Glow / Shimmer highlight on hover */}
+            {/* Luminous Glow highlight on hover */}
             <div
               className={`w-full h-full rounded-full transition-all duration-300 border-2 ${
                 btnHovered
-                  ? "bg-white/20 border-white shadow-[0_0_25px_rgba(255,255,255,0.7)] scale-[1.03]"
+                  ? "bg-white/20 border-white shadow-[0_0_30px_rgba(255,255,255,0.8)] scale-[1.03]"
                   : "bg-transparent border-transparent hover:border-white/40"
               }`}
             />
           </div>
 
           {/* ------------------------------------------------------------------- */}
-          {/* OVERLAY 2: Navigation Links Overlay (Top Right of image)            */}
+          {/* OVERLAY 2: Navigation Links Overlays                                */}
           {/* ------------------------------------------------------------------- */}
           <a
             href="#whats-inside"
-            className="absolute left-[44%] top-[3%] w-[14%] h-[5%] z-30 cursor-pointer rounded hover:bg-black/5 transition-colors"
+            className="absolute left-[46.2%] top-[3%] w-[8%] h-[5%] z-30 cursor-pointer rounded hover:bg-black/5 transition-colors"
             title="What's Inside"
             aria-label="Navigate to What's Inside"
           />
           <a
             href="#benefits"
-            className="absolute left-[60%] top-[3%] w-[10%] h-[5%] z-30 cursor-pointer rounded hover:bg-black/5 transition-colors"
+            className="absolute left-[55.2%] top-[3%] w-[6%] h-[5%] z-30 cursor-pointer rounded hover:bg-black/5 transition-colors"
             title="Benefits"
             aria-label="Navigate to Benefits"
           />
           <a
             href="#testimonials"
-            className="absolute left-[72%] top-[3%] w-[14%] h-[5%] z-30 cursor-pointer rounded hover:bg-black/5 transition-colors"
+            className="absolute left-[62%] top-[3%] w-[8.2%] h-[5%] z-30 cursor-pointer rounded hover:bg-black/5 transition-colors"
             title="Testimonials"
             aria-label="Navigate to Testimonials"
           />
           <a
             href="#faq"
-            className="absolute left-[88%] top-[3%] w-[7%] h-[5%] z-30 cursor-pointer rounded hover:bg-black/5 transition-colors"
+            className="absolute left-[71%] top-[3%] w-[4.5%] h-[5%] z-30 cursor-pointer rounded hover:bg-black/5 transition-colors"
             title="FAQ"
             aria-label="Navigate to FAQ"
           />
 
           {/* ------------------------------------------------------------------- */}
-          {/* OVERLAY 3: Social Media Links Overlay (Bottom of image)             */}
+          {/* OVERLAY 3: Social Media Links Overlays                              */}
           {/* ------------------------------------------------------------------- */}
           {/* Instagram */}
           <a
             href="https://instagram.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="absolute left-[6.5%] top-[92.5%] w-[4.5%] h-[5.5%] z-30 cursor-pointer rounded hover:bg-black/10 transition-colors"
-            aria-label="Bhargavi Papolu Instagram"
+            className="absolute left-[25.2%] top-[92.5%] w-[2.8%] h-[5.5%] z-30 cursor-pointer rounded hover:bg-black/10 transition-colors"
+            aria-label="Instagram"
           />
           {/* Twitter / X */}
           <a
             href="https://twitter.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="absolute left-[11.8%] top-[92.5%] w-[4.5%] h-[5.5%] z-30 cursor-pointer rounded hover:bg-black/10 transition-colors"
-            aria-label="Bhargavi Papolu Twitter / X"
+            className="absolute left-[28.5%] top-[92.5%] w-[2.8%] h-[5.5%] z-30 cursor-pointer rounded hover:bg-black/10 transition-colors"
+            aria-label="Twitter / X"
           />
           {/* Telegram */}
           <a
             href="https://telegram.org"
             target="_blank"
             rel="noopener noreferrer"
-            className="absolute left-[17.2%] top-[92.5%] w-[4.5%] h-[5.5%] z-30 cursor-pointer rounded hover:bg-black/10 transition-colors"
-            aria-label="Bhargavi Papolu Telegram Community"
+            className="absolute left-[31.6%] top-[92.5%] w-[2.8%] h-[5.5%] z-30 cursor-pointer rounded hover:bg-black/10 transition-colors"
+            aria-label="Telegram"
           />
           {/* YouTube (Right side) */}
           <a
             href="https://youtube.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="absolute left-[89%] top-[92.5%] w-[5%] h-[5.5%] z-30 cursor-pointer rounded hover:bg-black/10 transition-colors"
-            aria-label="Bhargavi Papolu YouTube Channel"
+            className="absolute left-[71.5%] top-[92.5%] w-[3.2%] h-[5.5%] z-30 cursor-pointer rounded hover:bg-black/10 transition-colors"
+            aria-label="YouTube"
           />
 
           {/* ------------------------------------------------------------------- */}
-          {/* OVERLAY 4: Floating Live 7-Hour Countdown Pill                      */}
+          {/* OVERLAY 4: Floating Live 7-Hour Urgency Timer Badge                 */}
           {/* ------------------------------------------------------------------- */}
           <div className="absolute top-2 left-2 sm:top-4 sm:left-4 z-20 flex items-center gap-1.5 bg-black/75 backdrop-blur-md text-amber-300 px-2.5 sm:px-3 py-1 rounded-full font-mono text-[10px] sm:text-xs font-black shadow-lg border border-white/15 pointer-events-none">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
             </span>
-            <span className="text-white/80 hidden xs:inline font-bold">7-Hr Launch:</span>
+            <span className="text-white/80 hidden xs:inline font-bold">7-Hr Special:</span>
             <span className="tabular-nums font-mono font-black text-amber-300">
               {isMounted ? `${formattedHours}h : ${formattedMinutes}m : ${formattedSeconds}s` : "06h : 48m : 20s"}
             </span>
           </div>
 
           {/* ------------------------------------------------------------------- */}
-          {/* OVERLAY 5: Verified Mentor Trust Badge                              */}
+          {/* OVERLAY 5: Verified Career Mentor Badge                             */}
           {/* ------------------------------------------------------------------- */}
           <div className="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 z-20 hidden xs:flex items-center gap-1.5 bg-paper-white/95 backdrop-blur-md text-charcoal px-3 py-1 rounded-full text-[10px] sm:text-xs font-extrabold shadow-md border border-editorial-border pointer-events-none">
             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
@@ -177,7 +177,7 @@ export default function Hero({ onOpenCheckout }: HeroProps) {
             {/* Radiant Action Button */}
             <button
               onClick={handleCta}
-              className="w-full sm:w-auto btn-coral-gradient py-3.5 px-7 rounded-2xl text-sm sm:text-base font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all group shrink-0"
+              className="w-full sm:w-auto btn-coral-gradient py-3.5 px-8 rounded-2xl text-sm sm:text-base font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all group shrink-0"
             >
               <span>GET THE PLAYBOOK — ₹299</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
