@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { PRODUCT } from "@/config/product";
 import { CONTENT } from "@/config/content";
 import { ShieldCheck, ArrowRight, Menu, X } from "lucide-react";
 
@@ -23,31 +22,31 @@ export default function Navbar({ onOpenCheckout }: NavbarProps) {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`sticky top-0 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled
           ? "bg-paper/95 backdrop-blur-md border-b border-editorial-border shadow-sm py-3"
-          : "bg-transparent py-4 md:py-5"
+          : "bg-paper/80 backdrop-blur-sm border-b border-editorial-border/40 py-3.5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Brand Logo & Badge */}
+          {/* Logo */}
           <a href="#" className="flex items-center gap-3 group">
-            <div className="w-9 h-9 rounded-lg bg-charcoal text-paper flex items-center justify-center font-bold text-sm tracking-wider shadow-sm group-hover:bg-coral transition-colors">
+            <div className="w-9 h-9 rounded-xl bg-charcoal text-paper flex items-center justify-center font-bold text-sm tracking-wider shadow-sm group-hover:bg-coral transition-colors">
               SP
             </div>
             <div className="flex flex-col">
-              <span className="font-editorial-condensed text-xl tracking-tight text-charcoal leading-none">
-                SALARY PLAYBOOK
+              <span className="font-editorial-condensed text-xl sm:text-2xl tracking-tight text-charcoal leading-none">
+                {CONTENT.nav.logoTitle}
               </span>
               <span className="text-[10px] font-semibold text-editorial-grey tracking-wider uppercase">
-                Worth & Negotiation
+                {CONTENT.nav.logoSubtitle}
               </span>
             </div>
           </a>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center space-x-7 text-xs font-semibold uppercase tracking-wider text-charcoal-light">
+          {/* Clean Navigation Links */}
+          <nav className="hidden md:flex items-center space-x-7 text-xs font-bold uppercase tracking-wider text-charcoal-light">
             {CONTENT.nav.links.map((link) => (
               <a
                 key={link.label}
@@ -59,16 +58,11 @@ export default function Navbar({ onOpenCheckout }: NavbarProps) {
             ))}
           </nav>
 
-          {/* Desktop CTA Button */}
+          {/* Right Action CTA */}
           <div className="hidden sm:flex items-center gap-3">
-            <div className="hidden xl:flex items-center gap-1.5 text-xs text-charcoal-light bg-charcoal/5 px-2.5 py-1 rounded-full border border-editorial-border">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Launch Price</span>
-            </div>
-
             <button
               onClick={onOpenCheckout}
-              className="btn-coral px-4 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm hover:shadow-md"
+              className="btn-coral px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm hover:shadow-md"
             >
               <span>{CONTENT.nav.ctaText}</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -79,7 +73,7 @@ export default function Navbar({ onOpenCheckout }: NavbarProps) {
           <div className="flex sm:hidden items-center gap-2">
             <button
               onClick={onOpenCheckout}
-              className="btn-coral px-3 py-1.5 rounded-md text-xs font-bold uppercase tracking-wider"
+              className="btn-coral px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider"
             >
               ₹299
             </button>
@@ -88,22 +82,22 @@ export default function Navbar({ onOpenCheckout }: NavbarProps) {
               className="p-2 rounded-lg text-charcoal hover:bg-charcoal/5 transition-colors"
               aria-label="Toggle Navigation Menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="sm:hidden bg-paper-cream border-b border-editorial-border px-4 pt-3 pb-5 space-y-3 shadow-lg">
-          <nav className="flex flex-col space-y-2.5">
+        <div className="sm:hidden bg-paper-cream border-b border-editorial-border px-4 pt-3 pb-5 space-y-3 shadow-lg animate-in fade-in slide-in-from-top-2 duration-200">
+          <nav className="flex flex-col space-y-2">
             {CONTENT.nav.links.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-sm font-semibold text-charcoal py-1.5 border-b border-editorial-border/40 hover:text-coral"
+                className="text-sm font-semibold text-charcoal py-2 border-b border-editorial-border/40 hover:text-coral"
               >
                 {link.label}
               </a>
@@ -114,7 +108,7 @@ export default function Navbar({ onOpenCheckout }: NavbarProps) {
               setMobileMenuOpen(false);
               onOpenCheckout();
             }}
-            className="w-full btn-coral py-3 rounded-lg text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-md"
+            className="w-full btn-coral py-3 rounded-xl text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-md"
           >
             <span>{CONTENT.nav.ctaText}</span>
             <ArrowRight className="w-4 h-4" />

@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { PRODUCT } from "@/config/product";
+import { trackEvent } from "@/config/analytics";
 import {
   X,
   ShieldCheck,
@@ -43,6 +44,13 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
     setErrorMsg("");
     setIsProcessing(true);
 
+    trackEvent("purchase", {
+      product: PRODUCT.name,
+      value: PRODUCT.priceRaw,
+      currency: "INR",
+      payment_method: paymentMethod,
+    });
+
     // Save details to sessionStorage for the download page
     try {
       sessionStorage.setItem("customerName", name);
@@ -52,7 +60,13 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
       console.error(err);
     }
 
-    // Simulate fast secure payment confirmation
+    // If an external checkout URL is configured (other than placeholder), redirect to it
+    if (PRODUCT.checkoutUrl && PRODUCT.checkoutUrl !== "CHECKOUT_URL_HERE") {
+      window.location.href = PRODUCT.checkoutUrl;
+      return;
+    }
+
+    // Otherwise simulate instantaneous secure payment and deliver access
     setTimeout(() => {
       setIsProcessing(false);
       onClose();
@@ -61,8 +75,14 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
   };
 
   const handleDirectRazorpay = () => {
-    if (PRODUCT.razorpayPaymentPageUrl) {
-      window.open(PRODUCT.razorpayPaymentPageUrl, "_blank");
+    // If the creator configures an active Razorpay page, open it
+    const targetUrl =
+      PRODUCT.checkoutUrl !== "CHECKOUT_URL_HERE"
+        ? PRODUCT.checkoutUrl
+        : PRODUCT.razorpayPaymentPageUrl;
+
+    if (targetUrl) {
+      window.open(targetUrl, "_blank");
     }
   };
 
@@ -94,10 +114,10 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
           <div className="p-4 rounded-2xl bg-paper-cream border border-editorial-border">
             <div className="flex items-center justify-between mb-2">
               <span className="font-bold text-sm text-charcoal">
-                Salary Worth & Negotiation Playbook
+                {PRODUCT.name}
               </span>
               <span className="font-mono text-lg font-black text-coral">
-                ₹299
+                {PRODUCT.price}
               </span>
             </div>
             <ul className="text-xs text-charcoal-light space-y-1 mb-2">
@@ -175,7 +195,7 @@ export default function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
               />
             </div>
 
-            {/* Payment Method Selector */}
+            {/* Payment Mode Selector */}
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-charcoal mb-1.5">
                 Select Payment Mode

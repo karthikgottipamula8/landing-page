@@ -1,34 +1,38 @@
 "use client";
 
-import React, { useState } from "react";
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero"; // Section 1
-import PainRelatability from "@/components/PainRelatability"; // Section 2
-import ReframeProblem from "@/components/ReframeProblem"; // Section 3
-import IntroduceProduct from "@/components/IntroduceProduct"; // Section 4
-import CoreMechanism from "@/components/CoreMechanism"; // Section 5
-import TransformationExample from "@/components/TransformationExample"; // Section 6
-import WhatsInside from "@/components/WhatsInside"; // Section 7
-import EvidenceSection from "@/components/EvidenceSection"; // Section 8
-import HRObjections from "@/components/HRObjections"; // Section 9
-import ScriptPack from "@/components/ScriptPack"; // Section 10
-import TotalCompensation from "@/components/TotalCompensation"; // Section 11
-import ReadinessScore from "@/components/ReadinessScore"; // Section 12
-import WhoItsFor from "@/components/WhoItsFor"; // Section 13
-import WhoItsNotFor from "@/components/WhoItsNotFor"; // Section 14
-import ProductPreview from "@/components/ProductPreview"; // Section 15
-import ValueStack from "@/components/ValueStack"; // Section 16
-import FAQSection from "@/components/FAQSection"; // Section 17
-import FinalCTA from "@/components/FinalCTA"; // Section 18
-import FutureProduct from "@/components/FutureProduct"; // Section 19
-import Footer from "@/components/Footer"; // Section 20
+import React, { useState, useEffect } from "react";
+import AnnouncementBar from "@/components/AnnouncementBar"; // 1. Announcement / value strip
+import Navbar from "@/components/Navbar"; // 2. Navigation
+import Hero from "@/components/Hero"; // 3. Above-the-fold Hero
+import ImmediateTrust from "@/components/ImmediateTrust"; // 4. Immediate trust / proof
+import CoreProblem from "@/components/CoreProblem"; // 5. Core problem
+import DifficultySection from "@/components/DifficultySection"; // 6. Why salary negotiation is difficult
+import MethodologySection from "@/components/MethodologySection"; // 7. The Salary Worth methodology
+import WhatsInside from "@/components/WhatsInside"; // 8. What is inside the playbook
+import ProductPreview from "@/components/ProductPreview"; // 9. Product preview
+import BonusScriptPack from "@/components/BonusScriptPack"; // 10. Bonus Script Pack
+import BeforeAfterSection from "@/components/BeforeAfterSection"; // 11. Before vs After
+import WhyDifferent from "@/components/WhyDifferent"; // 12. Why this system is different
+import CreatorAuthority from "@/components/CreatorAuthority"; // 13. Credibility / proof / Creator Feature
+import ValueStack from "@/components/ValueStack"; // 14. Offer / value stack
+import PricingSection from "@/components/PricingSection"; // 15. Pricing
+import TrustSection from "@/components/TrustSection"; // 16. Risk reversal / trust
+import FAQSection from "@/components/FAQSection"; // 17. FAQ
+import FinalCTA from "@/components/FinalCTA"; // 18. Final CTA
+import Footer from "@/components/Footer"; // 19. Footer
 import StickyMobileCTA from "@/components/StickyMobileCTA";
 import CheckoutModal from "@/components/CheckoutModal";
+import { trackEvent } from "@/config/analytics";
 
 export default function Home() {
   const [checkoutOpen, setCheckoutOpen] = useState(false);
 
+  useEffect(() => {
+    trackEvent("page_view", { page: "home" });
+  }, []);
+
   const openCheckout = () => {
+    trackEvent("checkout_start", { source: "page_cta" });
     setCheckoutOpen(true);
   };
 
@@ -38,73 +42,67 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen bg-paper text-charcoal pb-16 sm:pb-0">
-      {/* Sticky Navigation */}
+      {/* 1. Announcement / value strip */}
+      <AnnouncementBar onOpenCheckout={openCheckout} />
+
+      {/* 2. Navigation */}
       <Navbar onOpenCheckout={openCheckout} />
 
-      {/* SECTION 1 — ABOVE THE FOLD */}
+      {/* 3. Hero (Above the fold) */}
       <Hero onOpenCheckout={openCheckout} />
 
-      {/* SECTION 2 — PAIN / RELATABILITY */}
-      <PainRelatability />
+      {/* 4. Immediate trust / proof */}
+      <ImmediateTrust />
 
-      {/* SECTION 3 — REFRAME THE PROBLEM */}
-      <ReframeProblem />
+      {/* 5. Core problem */}
+      <CoreProblem />
 
-      {/* SECTION 4 — INTRODUCE THE PRODUCT */}
-      <IntroduceProduct />
+      {/* 6. Why salary negotiation is difficult */}
+      <DifficultySection />
 
-      {/* SECTION 5 — THE CORE MECHANISM */}
-      <CoreMechanism />
+      {/* 7. The Salary Worth methodology */}
+      <MethodologySection />
 
-      {/* SECTION 6 — SHOW THE TRANSFORMATION WITH AN EXAMPLE */}
-      <TransformationExample />
-
-      {/* SECTION 7 — WHAT'S INSIDE THE PLAYBOOK */}
+      {/* 8. What is inside the playbook */}
       <WhatsInside />
 
-      {/* SECTION 8 — EVIDENCE SECTION */}
-      <EvidenceSection onOpenCheckout={openCheckout} />
-
-      {/* SECTION 9 — HR OBJECTIONS */}
-      <HRObjections />
-
-      {/* SECTION 10 — SCRIPT PACK */}
-      <ScriptPack onOpenCheckout={openCheckout} />
-
-      {/* SECTION 11 — TOTAL COMPENSATION */}
-      <TotalCompensation />
-
-      {/* SECTION 12 — SALARY NEGOTIATION READINESS SCORE */}
-      <ReadinessScore />
-
-      {/* SECTION 13 — WHO THIS IS FOR */}
-      <WhoItsFor />
-
-      {/* SECTION 14 — WHO IT IS NOT FOR */}
-      <WhoItsNotFor />
-
-      {/* SECTION 15 — PRODUCT PREVIEW */}
+      {/* 9. Product preview */}
       <ProductPreview />
 
-      {/* SECTION 16 — VALUE STACK */}
+      {/* 10. Bonus Script Pack */}
+      <BonusScriptPack onOpenCheckout={openCheckout} />
+
+      {/* 11. Before vs After */}
+      <BeforeAfterSection />
+
+      {/* 12. Why this system is different */}
+      <WhyDifferent />
+
+      {/* 13. Credibility / proof / Creator Feature (Bhargavi Papolu live speaking & review) */}
+      <CreatorAuthority />
+
+      {/* 14. Offer / value stack */}
       <ValueStack onOpenCheckout={openCheckout} />
 
-      {/* SECTION 17 — OBJECTION HANDLING */}
+      {/* 15. Pricing */}
+      <PricingSection onOpenCheckout={openCheckout} />
+
+      {/* 16. Risk reversal / trust */}
+      <TrustSection />
+
+      {/* 17. FAQ */}
       <FAQSection />
 
-      {/* SECTION 18 — FINAL CTA */}
+      {/* 18. Final CTA */}
       <FinalCTA onOpenCheckout={openCheckout} />
 
-      {/* SECTION 19 — FUTURE PRODUCT */}
-      <FutureProduct />
-
-      {/* SECTION 20 — FOOTER */}
+      {/* 19. Footer */}
       <Footer onOpenCheckout={openCheckout} />
 
-      {/* Mobile-first Sticky CTA */}
+      {/* Mobile Sticky Purchase Bar */}
       <StickyMobileCTA onOpenCheckout={openCheckout} />
 
-      {/* High-Converting Checkout Modal */}
+      {/* High-Converting Frictionless Checkout Modal */}
       <CheckoutModal isOpen={checkoutOpen} onClose={closeCheckout} />
     </main>
   );

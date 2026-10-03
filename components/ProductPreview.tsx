@@ -2,30 +2,21 @@
 
 import React, { useState } from "react";
 import { CONTENT } from "@/config/content";
-import {
-  FileSpreadsheet,
-  FileCheck2,
-  Table,
-  Sliders,
-  CheckCircle,
-  Eye,
-  Layers,
-  Sparkles,
-} from "lucide-react";
+import { Eye, CheckCircle2, Lock, Sparkles, Layers } from "lucide-react";
 
 export default function ProductPreview() {
   const { preview } = CONTENT;
-  const [activeTab, setActiveTab] = useState<number>(0);
+  const [activeIdx, setActiveIdx] = useState<number>(0);
 
-  const activeSheet = preview.tabs[activeTab];
+  const activeDoc = preview.previews[activeIdx];
 
   return (
-    <section className="py-20 md:py-28 bg-paper-cream border-b border-editorial-border relative">
+    <section id="preview" className="py-20 md:py-28 bg-paper border-b border-editorial-border relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
           <span className="text-xs font-bold uppercase tracking-widest text-coral mb-3 inline-block">
-            TACTILE WORKSHEET PREVIEW
+            {preview.eyebrow}
           </span>
           <h2 className="font-editorial-condensed text-4xl sm:text-5xl md:text-6xl text-charcoal tracking-tight leading-none mb-4">
             {preview.headline}
@@ -35,94 +26,102 @@ export default function ProductPreview() {
           </p>
         </div>
 
-        {/* Interactive Tab Switcher */}
+        {/* Tab Selector */}
         <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
-          {preview.tabs.map((tab, idx) => (
+          {preview.previews.map((item, idx) => (
             <button
-              key={tab.id}
-              onClick={() => setActiveTab(idx)}
+              key={item.id}
+              onClick={() => setActiveIdx(idx)}
               className={`px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
-                activeTab === idx
+                activeIdx === idx
                   ? "bg-charcoal text-paper shadow-md"
                   : "bg-paper-white text-charcoal-light border border-editorial-border hover:border-coral/50"
               }`}
             >
-              {tab.label}
+              {item.title}
             </button>
           ))}
         </div>
 
-        {/* Realistic Interactive Document Mockup */}
+        {/* Tangible Document Preview Frame */}
         <div className="max-w-4xl mx-auto bg-paper-white rounded-3xl border border-editorial-border shadow-paper overflow-hidden">
-          {/* Mock Document Top Bar */}
+          {/* Top Bar */}
           <div className="bg-charcoal text-paper px-6 py-4 flex items-center justify-between border-b border-white/10">
             <div className="flex items-center gap-2">
               <span className="w-3 h-3 rounded-full bg-rose-500 inline-block" />
               <span className="w-3 h-3 rounded-full bg-amber-500 inline-block" />
               <span className="w-3 h-3 rounded-full bg-emerald-500 inline-block" />
               <span className="ml-2 text-xs font-mono uppercase text-white/70">
-                {activeSheet.title}
+                {activeDoc.subtitle}: {activeDoc.title}
               </span>
             </div>
             <div className="flex items-center gap-2 text-[11px] font-mono text-coral font-bold">
               <Eye className="w-3.5 h-3.5" />
-              <span>LIVE WORKSHEET PREVIEW</span>
+              <span>PREVIEW MODE</span>
             </div>
           </div>
 
-          {/* Mock Document Body */}
+          {/* Document Content */}
           <div className="p-6 sm:p-10">
             <div className="mb-6 pb-4 border-b border-editorial-border">
-              <div className="text-[11px] font-mono text-coral font-bold uppercase tracking-wider mb-1">
+              <div className="text-[10px] font-mono text-coral font-bold uppercase tracking-wider mb-1">
                 SYSTEM TEMPLATE
               </div>
               <h3 className="font-editorial-condensed text-3xl text-charcoal mb-2">
-                {activeSheet.title}
+                {activeDoc.title}
               </h3>
-              <p className="text-sm text-charcoal-light leading-relaxed">
-                {activeSheet.desc}
+              <p className="text-sm text-charcoal-light leading-relaxed font-sans">
+                {activeDoc.description}
               </p>
             </div>
 
-            {/* Realistic Mock Table / Fillable Grid */}
+            {/* Simulated Fillable Form / Table */}
             <div className="bg-paper-cream rounded-2xl border border-editorial-border overflow-hidden mb-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-px bg-editorial-border text-center font-mono text-[11px] font-bold uppercase text-charcoal-light">
-                {activeSheet.fields.map((field, fIdx) => (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-px bg-editorial-border text-center font-mono text-[10px] sm:text-[11px] font-bold uppercase text-charcoal-light">
+                {activeDoc.previewFields.map((field, fIdx) => (
                   <div key={fIdx} className="bg-paper-cream/90 p-3">
                     {field}
                   </div>
                 ))}
               </div>
 
-              {/* Sample Data Rows */}
+              {/* Sample Rows with subtle blur/tangibility */}
               <div className="p-4 sm:p-6 space-y-3 bg-paper-white text-xs">
                 <div className="p-3 bg-paper-cream/60 rounded-xl border border-editorial-border/60 flex flex-col sm:flex-row sm:items-center justify-between gap-2 font-mono">
                   <span className="font-semibold text-charcoal">
-                    Sample Entry #01: Verified Benchmark
+                    Input Entry #01: Verified Peer Benchmark
                   </span>
                   <span className="text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 self-start sm:self-auto">
-                    Status: Validated Data Point
+                    Confidence: High
                   </span>
                 </div>
 
                 <div className="p-3 bg-paper-cream/60 rounded-xl border border-editorial-border/60 flex flex-col sm:flex-row sm:items-center justify-between gap-2 font-mono">
                   <span className="font-semibold text-charcoal">
-                    Sample Entry #02: Documented Business Metric
+                    Calculated Result: Quantified Business Value
                   </span>
                   <span className="text-coral font-bold bg-coral-50 px-2 py-0.5 rounded border border-coral-200 self-start sm:self-auto">
-                    ROI Factor: 3.2x
+                    3-Proof Verified
                   </span>
+                </div>
+
+                {/* Subtle blurred locked preview line */}
+                <div className="relative p-4 rounded-xl bg-paper-cream/30 border border-dashed border-editorial-border flex items-center justify-center text-center">
+                  <div className="flex items-center gap-2 text-xs font-mono text-charcoal-light">
+                    <Lock className="w-3.5 h-3.5 text-coral" />
+                    <span>Full formula & editable cells unlocked upon purchase</span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Document Explanatory Note */}
+            {/* Bottom confirmation */}
             <div className="flex items-center justify-between text-xs text-charcoal-light font-medium pt-2">
               <span className="flex items-center gap-1.5">
-                <CheckCircle className="w-4 h-4 text-emerald-600" />
-                Fillable template provided in the digital bundle
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                Included with the Salary Worth & Negotiation Playbook bundle
               </span>
-              <span className="font-mono text-coral font-bold">Included in ₹299</span>
+              <span className="font-mono text-coral font-bold">₹299 One-Time</span>
             </div>
           </div>
         </div>

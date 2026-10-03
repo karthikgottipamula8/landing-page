@@ -7,16 +7,24 @@ declare global {
   }
 }
 
+export type AnalyticsEvent =
+  | "page_view"
+  | "hero_cta_click"
+  | "pricing_cta_click"
+  | "checkout_start"
+  | "purchase"
+  | "faq_interaction"
+  | "scroll_depth"
+  | "script_copy"
+  | "simulator_interaction"
+  | "download_page_view"
+  | "click_download";
+
 /**
  * Safely track analytics events (GA4, Meta Pixel, Console)
  */
 export function trackEvent(
-  eventName:
-    | "page_view"
-    | "click_pay_now"
-    | "download_page_view"
-    | "click_download"
-    | "instagram_click",
+  eventName: AnalyticsEvent,
   params?: Record<string, any>
 ) {
   try {
@@ -38,20 +46,5 @@ export function trackEvent(
     }
   } catch (err) {
     // Fail silently so user experience is never disrupted
-  }
-}
-
-/**
- * Helper to handle Pay Now clicks
- */
-export function handlePayNow(locationSource = "hero") {
-  trackEvent("click_pay_now", {
-    product: PRODUCT.name,
-    price: PRODUCT.price,
-    source: locationSource,
-  });
-
-  if (PRODUCT.razorpayPaymentPageUrl) {
-    window.location.href = PRODUCT.razorpayPaymentPageUrl;
   }
 }

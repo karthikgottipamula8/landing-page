@@ -20,7 +20,7 @@ export default function Footer({ onOpenCheckout }: FooterProps) {
       case "privacy":
         return "Privacy Policy";
       case "refund":
-        return "Refund Policy Placeholder";
+        return "Refund Policy & Guarantee";
       case "contact":
         return "Support & Inquiries";
       default:
@@ -31,11 +31,11 @@ export default function Footer({ onOpenCheckout }: FooterProps) {
   const getModalBody = (id: string) => {
     switch (id) {
       case "terms":
-        return "The Salary Worth & Negotiation Playbook is an informational digital guide and preparation workbook intended to assist professionals in preparing for compensation discussions. All calculations, estimates, and worksheets are educational tools and do not constitute legal, tax, or employment guarantees.";
+        return "The Salary Worth and Negotiation Playbook is an informational digital guide and preparation workbook intended to assist professionals in preparing for compensation discussions. All calculations, estimates, and worksheets are educational tools and do not constitute legal, tax, or employment guarantees.";
       case "privacy":
         return "We respect your personal privacy. We only collect the minimal contact information required to fulfill your digital download and communicate essential order receipts. We do not sell or monetize personal customer details.";
       case "refund":
-        return "Refund Policy: Because this is an instant digital product with complete downloadable access to PDF guides, spreadsheets, and script packs upon purchase, refunds are reviewed on a case-by-case basis according to creator policies. For questions, please reach out to our dedicated support email.";
+        return "Digital Delivery & Refund Notice: Because this product grants immediate, complete downloadable access to proprietary PDF guides, Excel/Sheets calculation models, and script packs upon purchase, refunds are reviewed on a case-by-case basis according to creator policies. If you experience any technical download difficulties, our team guarantees resolution within 24 business hours.";
       case "contact":
         return `For any inquiries, download support, or questions regarding the playbook, please reach out to: ${PRODUCT.supportEmail}. We typically respond within 24 business hours.`;
       default:
@@ -49,7 +49,7 @@ export default function Footer({ onOpenCheckout }: FooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-white/10">
           {/* Col 1: Product Name & Bio */}
           <div className="md:col-span-6 space-y-4">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2.5">
               <span className="w-8 h-8 rounded-lg bg-coral text-white flex items-center justify-center font-bold text-xs">
                 SP
               </span>
@@ -57,12 +57,15 @@ export default function Footer({ onOpenCheckout }: FooterProps) {
                 {footer.productName}
               </span>
             </div>
-            <p className="text-xs sm:text-sm text-white/70 max-w-md leading-relaxed">
+            <p className="text-xs sm:text-sm text-white/70 max-w-md leading-relaxed font-sans">
               {footer.description}
             </p>
+            <div className="text-xs font-semibold text-coral">
+              {footer.creatorCredit}
+            </div>
             <div className="flex items-center gap-2 text-xs text-white/60">
               <Mail className="w-4 h-4 text-coral" />
-              <span>{PRODUCT.supportEmail}</span>
+              <span>{footer.supportEmail}</span>
             </div>
           </div>
 
@@ -90,8 +93,8 @@ export default function Footer({ onOpenCheckout }: FooterProps) {
             <span className="text-xs font-mono uppercase text-coral font-bold tracking-wider block mb-3">
               LAUNCH SPECIAL • ₹299
             </span>
-            <p className="text-xs text-white/60 mb-4 leading-relaxed">
-              Step into your next appraisal or offer conversation fully prepared.
+            <p className="text-xs text-white/60 mb-4 leading-relaxed font-sans">
+              Step into your next appraisal, promotion, or offer conversation fully prepared.
             </p>
             <button
               onClick={onOpenCheckout}
@@ -108,7 +111,7 @@ export default function Footer({ onOpenCheckout }: FooterProps) {
           <p>{footer.disclaimer}</p>
           <div className="flex flex-col sm:flex-row items-center justify-between gap-2 border-t border-white/5 pt-4 text-white/40">
             <span>{footer.copyright}</span>
-            <span>Edition 2026 • Built for Indian Working Professionals</span>
+            <span>Edition 2026 • Created by Bhargavi Papolu</span>
           </div>
         </div>
       </div>

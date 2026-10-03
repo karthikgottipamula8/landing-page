@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { CONTENT } from "@/config/content";
+import { trackEvent } from "@/config/analytics";
 import { ChevronDown, HelpCircle } from "lucide-react";
 
 export default function FAQSection() {
@@ -9,16 +10,20 @@ export default function FAQSection() {
   const [openIdx, setOpenIdx] = useState<number | null>(0);
 
   const toggle = (idx: number) => {
-    setOpenIdx(openIdx === idx ? null : idx);
+    const nextState = openIdx === idx ? null : idx;
+    setOpenIdx(nextState);
+    if (nextState !== null) {
+      trackEvent("faq_interaction", { question: faq.items[idx]?.q });
+    }
   };
 
   return (
-    <section id="faq" className="py-20 md:py-28 bg-paper-cream border-b border-editorial-border relative">
+    <section id="faq" className="py-20 md:py-28 bg-paper border-b border-editorial-border relative">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className="text-xs font-bold uppercase tracking-widest text-coral mb-3 inline-block">
-            OBJECTION HANDLING
+            DIRECT ANSWERS
           </span>
           <h2 className="font-editorial-condensed text-4xl sm:text-5xl md:text-6xl text-charcoal tracking-tight leading-none mb-4">
             {faq.headline}
@@ -28,14 +33,14 @@ export default function FAQSection() {
           </p>
         </div>
 
-        {/* FAQ Accordion List */}
-        <div className="space-y-3.5">
+        {/* 11 Accordion Items */}
+        <div className="space-y-3">
           {faq.items.map((item, idx) => {
             const isOpen = openIdx === idx;
             return (
               <div
                 key={idx}
-                className="bg-paper-white rounded-2xl border border-editorial-border shadow-sm overflow-hidden transition-all duration-200"
+                className="bg-paper-white rounded-2xl border border-editorial-border shadow-xs overflow-hidden transition-all duration-200"
               >
                 <button
                   type="button"
