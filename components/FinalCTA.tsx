@@ -1,59 +1,68 @@
 "use client";
 
 import React from "react";
-import { PRODUCT } from "@/config/product";
 import { CONTENT } from "@/config/content";
-import { handlePayNow } from "@/config/analytics";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight, Sparkles, CheckCircle2, ShieldCheck } from "lucide-react";
 
-export default function FinalCTA() {
-  const { finalCTA } = CONTENT;
+interface FinalCTAProps {
+  onOpenCheckout: () => void;
+}
+
+export default function FinalCTA({ onOpenCheckout }: FinalCTAProps) {
+  const { finalCta } = CONTENT;
 
   return (
-    <section className="py-24 md:py-36 bg-coral text-white relative overflow-hidden text-center">
-      {/* Decorative oversized background ring */}
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full border border-white/10 pointer-events-none"
-        aria-hidden="true"
-      />
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] rounded-full border border-white/10 pointer-events-none"
-        aria-hidden="true"
-      />
+    <section className="py-20 md:py-32 bg-charcoal text-paper relative overflow-hidden border-b border-charcoal/20">
+      {/* Subtle background glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-coral/15 blur-[120px] rounded-full pointer-events-none" />
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        <span className="text-[11px] sm:text-xs font-bold tracking-[0.25em] uppercase text-white/80 bg-white/10 px-4 py-1.5 rounded-full inline-block mb-6">
-          TAKE ACTION TODAY
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+        <span className="text-xs font-mono uppercase tracking-widest text-coral font-bold block mb-4">
+          YOUR NEXT SALARY DECISION
         </span>
 
-        <h2 className="font-editorial-condensed text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-white uppercase leading-[0.85] tracking-tight mb-8">
-          YOUR NEXT <br />
-          CAREER MOVE <br />
-          <span className="text-white drop-shadow-sm underline decoration-white/30 underline-offset-8">
-            STARTS HERE.
-          </span>
+        <h2 className="font-editorial-condensed text-3xl sm:text-4xl md:text-5xl text-white/90 tracking-wide mb-3">
+          {finalCta.headline}
         </h2>
 
-        <p className="text-base sm:text-xl text-white/90 max-w-xl mx-auto font-normal leading-relaxed mb-10">
-          {finalCTA.subtitle}
-        </p>
-
-        {/* Product price & CTA box */}
-        <div className="inline-flex flex-col items-center">
-          <button
-            onClick={() => handlePayNow("final_cta")}
-            className="group inline-flex items-center justify-center space-x-3 bg-white hover:bg-paper-white text-charcoal font-editorial-condensed text-2xl sm:text-3xl uppercase tracking-wider px-10 py-5 rounded-full shadow-2xl transition-all transform hover:-translate-y-1 active:translate-y-0"
-          >
-            <span>{finalCTA.ctaText} — {PRODUCT.price}</span>
-            <ArrowUpRight className="w-6 h-6 text-coral transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-          </button>
-
-          <span className="text-xs font-bold tracking-widest uppercase text-white/80 mt-4">
-            {PRODUCT.paymentBadge}
-          </span>
+        {/* Large Statement */}
+        <div className="font-editorial-condensed text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-white tracking-tight leading-none mb-8">
+          {finalCta.bigStatement}
         </div>
 
+        {/* 5 Core Steps Checklist */}
+        <div className="max-w-md mx-auto mb-10 space-y-2.5 text-left bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-sm">
+          {finalCta.steps.map((step, idx) => (
+            <div key={idx} className="flex items-center gap-3">
+              <CheckCircle2 className="w-4 h-4 text-coral shrink-0" />
+              <span className="text-sm font-semibold text-white/90 font-sans">
+                {step}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        {/* Pricing Block & Call to Action */}
+        <div className="flex flex-col items-center justify-center gap-4">
+          <div className="flex items-baseline gap-2 mb-1">
+            <span className="text-xs font-mono uppercase text-white/60">Launch Price:</span>
+            <span className="font-mono text-3xl font-black text-coral">{finalCta.price}</span>
+            <span className="text-xs text-white/60">One-Time Access</span>
+          </div>
+
+          <button
+            onClick={onOpenCheckout}
+            className="btn-coral px-10 py-5 rounded-2xl text-lg sm:text-xl font-extrabold uppercase tracking-wider flex items-center justify-center gap-3 shadow-2xl group w-full sm:w-auto"
+          >
+            <span>{finalCta.cta}</span>
+            <ArrowRight className="w-6 h-6 group-hover:translate-x-1.5 transition-transform" />
+          </button>
+
+          <p className="text-xs text-white/60 mt-3 font-medium flex items-center gap-2">
+            <Sparkles className="w-3.5 h-3.5 text-coral shrink-0" />
+            <span>{finalCta.microcopy}</span>
+          </p>
+        </div>
       </div>
     </section>
   );

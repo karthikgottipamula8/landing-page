@@ -2,10 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 import { PRODUCT } from "@/config/product";
-import { handlePayNow } from "@/config/analytics";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { CONTENT } from "@/config/content";
+import { ShieldCheck, ArrowRight, Menu, X } from "lucide-react";
 
-export default function Navbar() {
+interface NavbarProps {
+  onOpenCheckout: () => void;
+}
+
+export default function Navbar({ onOpenCheckout }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -17,76 +21,72 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    { label: "THE PROBLEM", href: "#problem" },
-    { label: "WHAT'S INSIDE", href: "#inside" },
-    { label: "THE GUIDE", href: "#guide" },
-    { label: "WHO IT'S FOR", href: "#who" },
-    { label: "FAQ", href: "#faq" },
-  ];
-
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-[#FAF9F5]/92 backdrop-blur-md border-b border-black/[0.06] shadow-sm py-3"
-          : "bg-transparent py-5 md:py-6"
+          ? "bg-paper/95 backdrop-blur-md border-b border-editorial-border shadow-sm py-3"
+          : "bg-transparent py-4 md:py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo / Brand Name */}
-          <a
-            href="#"
-            className="group flex flex-col items-start leading-none tracking-tight focus:outline-none"
-          >
-            <span className="font-editorial-condensed text-2xl md:text-3xl text-charcoal tracking-wide group-hover:text-coral transition-colors">
-              {PRODUCT.clientName}
-            </span>
-            <span className="text-[10px] uppercase tracking-widest text-editorial-grey font-medium -mt-0.5">
-              JOB HIKE GUIDE
-            </span>
+          {/* Brand Logo & Badge */}
+          <a href="#" className="flex items-center gap-3 group">
+            <div className="w-9 h-9 rounded-lg bg-charcoal text-paper flex items-center justify-center font-bold text-sm tracking-wider shadow-sm group-hover:bg-coral transition-colors">
+              SP
+            </div>
+            <div className="flex flex-col">
+              <span className="font-editorial-condensed text-xl tracking-tight text-charcoal leading-none">
+                SALARY PLAYBOOK
+              </span>
+              <span className="text-[10px] font-semibold text-editorial-grey tracking-wider uppercase">
+                Worth & Negotiation
+              </span>
+            </div>
           </a>
 
-          {/* Desktop Nav Links */}
-          <nav className="hidden lg:flex items-center space-x-8">
-            {navLinks.map((link) => (
+          {/* Desktop Navigation Links */}
+          <nav className="hidden lg:flex items-center space-x-7 text-xs font-semibold uppercase tracking-wider text-charcoal-light">
+            {CONTENT.nav.links.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="text-xs font-semibold uppercase tracking-wider text-charcoal/70 hover:text-coral transition-colors duration-200"
+                className="hover:text-coral transition-colors"
               >
                 {link.label}
               </a>
             ))}
           </nav>
 
-          {/* Right Action */}
-          <div className="hidden sm:flex items-center space-x-4">
-            <span className="hidden md:inline-block text-xs font-bold text-coral tracking-wider uppercase bg-coral-100 px-2.5 py-1 rounded-full">
-              {PRODUCT.price}
-            </span>
+          {/* Desktop CTA Button */}
+          <div className="hidden sm:flex items-center gap-3">
+            <div className="hidden xl:flex items-center gap-1.5 text-xs text-charcoal-light bg-charcoal/5 px-2.5 py-1 rounded-full border border-editorial-border">
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+              <span>Launch Price</span>
+            </div>
+
             <button
-              onClick={() => handlePayNow("navbar")}
-              className="group inline-flex items-center justify-center space-x-2 bg-coral hover:bg-coral-600 text-white font-semibold text-xs tracking-wider uppercase px-5 py-2.5 rounded-full shadow-sm hover:shadow transition-all duration-200 transform hover:-translate-y-0.5"
+              onClick={onOpenCheckout}
+              className="btn-coral px-4 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm hover:shadow-md"
             >
-              <span>GET THE GUIDE</span>
-              <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <span>{CONTENT.nav.ctaText}</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex sm:hidden items-center space-x-2">
+          <div className="flex sm:hidden items-center gap-2">
             <button
-              onClick={() => handlePayNow("navbar-mobile-quick")}
-              className="bg-coral text-white text-[11px] font-bold px-3 py-1.5 rounded-full"
+              onClick={onOpenCheckout}
+              className="btn-coral px-3 py-1.5 rounded-md text-xs font-bold uppercase tracking-wider"
             >
-              {PRODUCT.price}
+              ₹299
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-charcoal hover:text-coral focus:outline-none"
-              aria-label="Toggle navigation menu"
+              className="p-2 rounded-lg text-charcoal hover:bg-charcoal/5 transition-colors"
+              aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -94,33 +94,31 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Nav Dropdown */}
+      {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="sm:hidden bg-[#FAF9F5] border-b border-black/[0.08] px-4 pt-3 pb-6 shadow-xl animate-in slide-in-from-top-4 duration-200">
-          <div className="flex flex-col space-y-3">
-            {navLinks.map((link) => (
+        <div className="sm:hidden bg-paper-cream border-b border-editorial-border px-4 pt-3 pb-5 space-y-3 shadow-lg">
+          <nav className="flex flex-col space-y-2.5">
+            {CONTENT.nav.links.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-sm font-semibold uppercase tracking-wider text-charcoal py-2 border-b border-black/[0.04] hover:text-coral"
+                className="text-sm font-semibold text-charcoal py-1.5 border-b border-editorial-border/40 hover:text-coral"
               >
                 {link.label}
               </a>
             ))}
-            <div className="pt-2">
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  handlePayNow("navbar-mobile-drawer");
-                }}
-                className="w-full flex items-center justify-center space-x-2 bg-coral text-white font-bold text-xs uppercase tracking-wider py-3 rounded-full shadow-md"
-              >
-                <span>GET THE GUIDE — {PRODUCT.price}</span>
-                <ArrowUpRight className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
+          </nav>
+          <button
+            onClick={() => {
+              setMobileMenuOpen(false);
+              onOpenCheckout();
+            }}
+            className="w-full btn-coral py-3 rounded-lg text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-md"
+          >
+            <span>{CONTENT.nav.ctaText}</span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
         </div>
       )}
     </header>

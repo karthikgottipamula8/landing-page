@@ -1,37 +1,30 @@
 /**
  * Central Product Configuration
- * Edit these values to update product details, pricing, payment links, and redirects.
+ * Salary Worth & Negotiation Playbook
  */
 export const PRODUCT = {
-  clientName: "Bhargavi Papolu",
-  name: "Job Hike Guide",
-  tagline: "Career growth, salary hikes & job switching for Telugu IT professionals",
-  price: "₹499",
-  priceRaw: 499,
+  name: "Salary Worth & Negotiation Playbook",
+  shortName: "Salary Playbook",
+  category: "SALARY NEGOTIATION PLAYBOOK",
+  tagline: "Know your number before HR gives you theirs.",
+  corePromise: "Find your realistic market salary. Calculate your negotiation range. Build your evidence. Know exactly what to say when asking HR for more.",
+  price: "₹299",
+  priceRaw: 299,
   currency: "INR",
   currencySymbol: "₹",
-  paymentBadge: "ONE-TIME PAYMENT • DIGITAL GUIDE",
-  format: "Digital PDF Guide + Actionable Worksheets",
+  pricingType: "Launch Price • One-Time Purchase",
+  format: "Instant Digital Access • 15 Worksheets & Frameworks • Complete HR Script Pack",
   
-  // Replace this with your actual Razorpay Payment Page URL (e.g., https://rzp.io/l/your-page)
-  // When set to an external URL, the user is redirected to Razorpay checkout.
-  // For local testing, clicking will open this link or prompt to configure.
-  razorpayPaymentPageUrl: "https://rzp.io/l/bhargavi-job-hike-guide",
+  // Checkout & Download URLs
+  razorpayPaymentPageUrl: "https://rzp.io/l/salary-worth-playbook",
+  downloadUrl: "/download",
+  pdfFilename: "Salary-Worth-and-Negotiation-Playbook.pdf",
+
+  // Support & Transparency
+  supportEmail: "support@salaryplaybook.in",
+  deliveryNote: "Instant digital access via direct download and email confirmation.",
   
-  // Download configuration
-  pdfUrl: "/assets/job-hike-guide.pdf",
-  pdfFilename: "Job-Hike-Guide-Bhargavi-Papolu.pdf",
-  downloadRedirectDelay: 5000, // Milliseconds to wait before redirecting back to home page
-  
-  // Social links
-  instagramUrl: "https://www.instagram.com/bhargavi_papolu_/",
-  instagramHandle: "@bhargavi_papolu_",
-  
-  // Support & Legal
-  supportEmail: "support@jobhikeguide.com",
-  refundPolicyText: "Refund policy will be updated by the creator. Contact support for inquiries.",
-  
-  // Analytics IDs (leave blank if not yet configured; site will not break)
+  // Analytics IDs (optional placeholders)
   analytics: {
     ga4Id: "",
     metaPixelId: "",

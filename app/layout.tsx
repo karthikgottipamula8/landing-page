@@ -23,51 +23,38 @@ const caveat = Caveat({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#FAF9F5",
+  themeColor: "#181818",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://jobhikeguide.com"),
-  title: "Job Hike Guide for Telugu IT Professionals | Bhargavi Papolu",
+  title: "Salary Worth & Negotiation Playbook | Know Your Number Before HR Gives You Theirs",
   description:
-    "A practical, art-directed digital guide for Telugu IT professionals navigating appraisals, salary conversations, job switches, and career growth.",
+    "Find your realistic market salary, calculate your negotiation range, build your evidence, and know exactly what to say when asking HR for more. Practical worksheets, 5-Number method & HR scripts.",
   keywords: [
-    "Job Hike Guide",
-    "Bhargavi Papolu",
-    "Telugu IT Professionals",
-    "IT Career Growth",
-    "Salary Hike Telugu",
-    "Appraisal Preparation",
-    "Software Developer Career",
+    "Salary Worth Playbook",
     "Salary Negotiation India",
+    "Appraisal Preparation",
+    "Expected CTC",
+    "5-Number Salary Method",
+    "Salary Hike Scripts",
+    "HR Negotiation India",
+    "Job Switch CTC",
   ],
-  authors: [{ name: "Bhargavi Papolu" }],
+  authors: [{ name: "Salary Worth & Negotiation Playbook" }],
   openGraph: {
-    title: "Job Hike Guide for Telugu IT Professionals | Bhargavi Papolu",
+    title: "Salary Worth & Negotiation Playbook | Know Your Number Before HR Gives You Theirs",
     description:
-      "A practical, art-directed digital guide for Telugu IT professionals navigating appraisals, salary conversations, job switches, and career growth.",
-    url: "https://jobhikeguide.com",
-    siteName: "Bhargavi Papolu - Job Hike Guide",
-    images: [
-      {
-        url: "/assets/bhargavi-cutout.png",
-        width: 1024,
-        height: 1024,
-        alt: "Bhargavi Papolu - Job Hike Guide",
-      },
-    ],
+      "Find your realistic market salary, calculate your negotiation range, build your evidence, and know exactly what to say when asking HR for more.",
     locale: "en_IN",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Job Hike Guide for Telugu IT Professionals | Bhargavi Papolu",
-    description:
-      "A practical career & salary guide for Telugu IT professionals by Bhargavi Papolu.",
-    images: ["/assets/bhargavi-cutout.png"],
+    title: "Salary Worth & Negotiation Playbook",
+    description: "Know your number before HR gives you theirs. Instant digital access for ₹299.",
   },
   robots: {
     index: true,
@@ -83,7 +70,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${bebas.variable} ${jakarta.variable} ${caveat.variable}`}>
       <body className="font-body selection:bg-coral selection:text-white bg-paper text-charcoal antialiased">
-        {/* Subtle paper grain texture overlay across entire site */}
         <div className="paper-grain" aria-hidden="true" />
         {children}
       </body>
