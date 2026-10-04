@@ -42,7 +42,7 @@ export default function Home() {
       <Hero onOpenCheckout={openCheckout} />
 
       {/* 4. What's Inside: Master Playbook (PDF), 15 Worksheets & HR Scripts */}
-      <WhatsInside />
+      <WhatsInside onOpenCheckout={openCheckout} />
 
       {/* 5. Benefits & Interactive 5-Number CTC Calculator */}
       <BenefitsSection onOpenCheckout={openCheckout} />
