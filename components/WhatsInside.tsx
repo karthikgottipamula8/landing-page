@@ -10,7 +10,6 @@ import {
   FileText,
   TrendingUp,
   MessageSquare,
-  ShieldCheck,
   Sparkles,
   ArrowRight,
   CheckCircle2,
@@ -19,7 +18,8 @@ import {
   Target,
   BarChart3,
   Layers,
-  Check,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 
 interface WhatsInsideProps {
@@ -53,10 +53,11 @@ const categoryColors: Record<string, { bg: string; text: string; border: string 
 export default function WhatsInside({ onOpenCheckout }: WhatsInsideProps) {
   const { inside } = CONTENT;
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [showAll, setShowAll] = useState<boolean>(false);
 
   const categories = ["All", "Calculators & Grids", "Scripts & Playbooks", "Frameworks"];
 
-  const filteredModules = inside.modules.filter((item, idx) => {
+  const filteredModules = inside.modules.filter((item) => {
     if (selectedCategory === "All") return true;
     if (selectedCategory === "Calculators & Grids") {
       return ["Calculator", "Strategy", "Financials"].includes(item.tag);
@@ -70,6 +71,11 @@ export default function WhatsInside({ onOpenCheckout }: WhatsInsideProps) {
     return true;
   });
 
+  // Display only 3 modules by default; show all when showAll is true or category is filtered
+  const displayedModules = showAll || selectedCategory !== "All"
+    ? filteredModules
+    : filteredModules.slice(0, 3);
+
   return (
     <section id="whats-inside" className="py-16 sm:py-24 bg-paper-cream border-b border-editorial-border relative overflow-hidden">
       {/* Background Subtle Accent Gradients */}
@@ -79,7 +85,7 @@ export default function WhatsInside({ onOpenCheckout }: WhatsInsideProps) {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-coral/10 border border-coral/20 text-coral text-xs font-bold uppercase tracking-wider mb-4">
             <Sparkles className="w-3.5 h-3.5" />
             <span>{inside.eyebrow}</span>
@@ -92,115 +98,28 @@ export default function WhatsInside({ onOpenCheckout }: WhatsInsideProps) {
           </p>
         </div>
 
-        {/* 3D VISUAL SHOWCASE HERO CARD */}
-        <div className="mb-14 sm:mb-20 rounded-3xl bg-charcoal text-paper overflow-hidden shadow-floating border border-charcoal/30 relative">
-          
-          {/* Subtle Ambient Backlight */}
-          <div className="absolute -top-24 -right-24 w-96 h-96 bg-coral/20 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+        {/* 1. ZOOMED 3D BOOK & FLOATING MODULES VISUAL (Centerpiece without master bundle box or badge) */}
+        <div className="mb-14 sm:mb-20 flex justify-center">
+          <div className="relative w-full max-w-3xl group">
+            {/* Soft Ambient Radial Glow */}
+            <div className="absolute -inset-2 rounded-3xl bg-gradient-to-r from-coral/20 via-amber-400/15 to-coral/20 opacity-70 blur-2xl group-hover:opacity-100 transition duration-700 pointer-events-none" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center p-6 sm:p-10 lg:p-12 relative z-10">
-            
-            {/* Left Column: 3D Visual Centerpiece */}
-            <div className="lg:col-span-6 flex flex-col items-center justify-center">
-              <div className="relative w-full max-w-[480px] group">
-                
-                {/* Glow ring */}
-                <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-coral/40 via-amber-400/20 to-coral/40 opacity-75 blur-xl group-hover:opacity-100 transition duration-700" />
-                
-                {/* Visual Image Container */}
-                <div className="relative rounded-2xl overflow-hidden border border-white/15 bg-charcoal-muted shadow-2xl transition-transform duration-500 hover:scale-[1.02]">
-                  <Image
-                    src="/assets/book-modules-mockup.jpg"
-                    alt="Job Hike Guide Hardcover Playbook & Floating Module Cards by Bhargavi Papolu"
-                    width={800}
-                    height={600}
-                    className="w-full h-auto object-cover block"
-                    priority
-                  />
-                  {/* Subtle reflection overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/40 via-transparent to-transparent pointer-events-none" />
-                </div>
-
-                {/* Floating pill over image bottom */}
-                <div className="absolute -bottom-3.5 left-1/2 -translate-x-1/2 bg-charcoal/95 border border-white/20 px-4 py-1.5 rounded-full shadow-lg flex items-center gap-2 whitespace-nowrap">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-[11px] font-mono font-bold tracking-wider text-white uppercase">
-                    3D Visual Preview • Master Bundle
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column: Detailed Value Stack & Direct Action */}
-            <div className="lg:col-span-6 flex flex-col justify-center text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-coral/20 border border-coral/30 text-coral text-xs font-mono font-bold uppercase tracking-wider mb-4 w-fit">
-                <BookOpen className="w-3.5 h-3.5" />
-                <span>CORE MASTER ASSET</span>
-              </div>
-
-              <h3 className="font-editorial-condensed text-2xl sm:text-4xl text-white tracking-tight leading-tight mb-4">
-                Salary Worth & Negotiation Playbook
-                <span className="block text-coral text-xl sm:text-2xl mt-1 font-sans font-semibold">
-                  (Master Guide + 9 Companion Sheets)
-                </span>
-              </h3>
-
-              <p className="text-white/80 text-sm sm:text-base leading-relaxed mb-6 font-light">
-                A structured, art-directed reference manual designed to be digested in 45–60 minutes.
-                Zero motivational fluff: pure market research protocols, psychological negotiation mechanics, and decision matrices.
-              </p>
-
-              {/* Key Deliverables Bullet Points */}
-              <div className="space-y-3 mb-8">
-                {[
-                  "Complete 45-60 min Master PDF Playbook (instant download)",
-                  "9 Fillable Companion Worksheets & Calculation Grids",
-                  "Word-for-word HR negotiation & counter-offer scripts",
-                  "1-Page condensed cheat sheet you keep on your desk during calls",
-                  "Lifetime access with all future version updates included",
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-2.5">
-                    <div className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
-                      <Check className="w-3 h-3 stroke-[2.5]" />
-                    </div>
-                    <span className="text-xs sm:text-sm text-white/90 font-medium">
-                      {item}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Action Box with Pricing & Instant Claim */}
-              <div className="p-4 sm:p-5 rounded-2xl bg-white/5 border border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <div>
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-2xl sm:text-3xl font-extrabold text-white">₹299</span>
-                    <span className="text-xs text-white/50 line-through">₹2,499</span>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-coral text-white uppercase tracking-wider">
-                      88% OFF
-                    </span>
-                  </div>
-                  <span className="text-[11px] text-white/70 block mt-0.5">
-                    Instant access delivered to your email right away
-                  </span>
-                </div>
-
-                <button
-                  onClick={onOpenCheckout}
-                  className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-coral to-coral-600 hover:from-coral-600 hover:to-coral-700 text-white font-bold text-sm tracking-wide shadow-lg hover:shadow-coral/30 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer shrink-0"
-                >
-                  <span>Claim Master Bundle</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              </div>
-
+            {/* Crisp Zoomed Visual Container */}
+            <div className="relative rounded-3xl overflow-hidden border border-editorial-border bg-paper-white shadow-floating hover:shadow-2xl transition-all duration-300">
+              <Image
+                src="/assets/book-modules-mockup.jpg"
+                alt="Job Hike Guide Hardcover Playbook & Floating Module Cards by Bhargavi Papolu"
+                width={1200}
+                height={896}
+                className="w-full h-auto object-cover block"
+                priority
+              />
             </div>
           </div>
         </div>
 
-        {/* 9 STRUCTURED SUB-COMPONENTS SECTION */}
-        <div className="mb-8">
+        {/* 2. EXPLORE THE 9 STRATEGIC MODULES (Shows 3 by default with View All down arrow) */}
+        <div className="mb-12">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
             <div>
               <span className="text-[11px] font-mono uppercase text-coral font-bold tracking-widest block">
@@ -211,12 +130,15 @@ export default function WhatsInside({ onOpenCheckout }: WhatsInsideProps) {
               </h3>
             </div>
 
-            {/* Filter Pills for Mobile & Desktop Navigation */}
+            {/* Category Filter Pills */}
             <div className="flex flex-wrap gap-1.5 sm:gap-2">
               {categories.map((cat) => (
                 <button
                   key={cat}
-                  onClick={() => setSelectedCategory(cat)}
+                  onClick={() => {
+                    setSelectedCategory(cat);
+                    if (cat !== "All") setShowAll(true);
+                  }}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                     selectedCategory === cat
                       ? "bg-charcoal text-paper shadow-sm"
@@ -231,8 +153,7 @@ export default function WhatsInside({ onOpenCheckout }: WhatsInsideProps) {
 
           {/* Modules Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-            {filteredModules.map((item, idx) => {
-              // Find the original module index
+            {displayedModules.map((item) => {
               const origIdx = inside.modules.findIndex((m) => m.title === item.title);
               const IconComponent = moduleIcons[origIdx] || BookOpen;
               const badgeStyle = categoryColors[item.tag] || {
@@ -273,7 +194,7 @@ export default function WhatsInside({ onOpenCheckout }: WhatsInsideProps) {
                     </p>
                   </div>
 
-                  {/* Card Bottom: Included indicator */}
+                  {/* Card Bottom */}
                   <div className="mt-4 pt-3 border-t border-editorial-border/60 flex items-center justify-between text-[11px] text-charcoal-muted">
                     <span className="flex items-center gap-1.5 text-emerald-700 font-medium">
                       <CheckCircle2 className="w-3.5 h-3.5" />
@@ -287,9 +208,24 @@ export default function WhatsInside({ onOpenCheckout }: WhatsInsideProps) {
               );
             })}
           </div>
+
+          {/* 3. VIEW ALL (9 MODULES) DOWN ARROW TOGGLE BUTTON */}
+          <div className="mt-8 flex justify-center">
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-paper-white hover:bg-paper-cream border-2 border-editorial-border hover:border-coral text-charcoal font-bold text-xs uppercase tracking-wider shadow-sm hover:shadow-md transition-all cursor-pointer group"
+            >
+              <span>{showAll ? "Show Less" : "View All (9 Modules)"}</span>
+              {showAll ? (
+                <ChevronUp className="w-4 h-4 text-coral group-hover:-translate-y-0.5 transition-transform" />
+              ) : (
+                <ChevronDown className="w-4 h-4 text-coral group-hover:translate-y-0.5 transition-transform animate-bounce" />
+              )}
+            </button>
+          </div>
         </div>
 
-        {/* BOTTOM GUARANTEE & INSTANT ACTION STRIP */}
+        {/* 4. BOTTOM GUARANTEE & INSTANT ACTION STRIP */}
         <div className="bg-paper-white p-6 sm:p-8 rounded-3xl border border-editorial-border shadow-card flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
           <div className="flex flex-col sm:flex-row items-center gap-4">
             <div className="w-12 h-12 rounded-2xl bg-coral/10 text-coral flex items-center justify-center shrink-0">
@@ -310,7 +246,7 @@ export default function WhatsInside({ onOpenCheckout }: WhatsInsideProps) {
               onClick={onOpenCheckout}
               className="w-full sm:w-auto px-6 py-3 rounded-xl bg-charcoal hover:bg-charcoal-muted text-paper font-bold text-xs uppercase tracking-wider shadow-sm hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
-              <span>Download All 9 Modules</span>
+              <span>Download All 9 Modules — ₹299</span>
               <ArrowRight className="w-4 h-4 text-coral" />
             </button>
           </div>

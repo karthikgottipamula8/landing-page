@@ -47,12 +47,52 @@ export default function Hero({ onOpenCheckout }: HeroProps) {
 
             {/* Mobile Visual Showcase (Visible only on mobile/tablet) */}
             <div className="w-full lg:hidden my-6 relative flex justify-center">
-              <div className="relative w-full max-w-[340px] aspect-[4/5] flex items-end justify-center cursor-pointer" onClick={handleCta}>
+              <div className="relative w-full max-w-[350px] aspect-[4/5] flex items-end justify-center cursor-pointer" onClick={handleCta}>
                 {/* Mobile Organic Blob Background */}
-                <div className="absolute w-[280px] h-[330px] bg-gradient-to-br from-[#FCD5C8]/85 via-[#F8BCAD]/70 to-[#FCEAE5]/90 rounded-[48%_52%_58%_42%/42%_55%_45%_58%] shadow-inner -z-10 bottom-4" />
+                <div className="absolute w-[290px] h-[340px] bg-gradient-to-br from-[#FCD5C8]/85 via-[#F8BCAD]/70 to-[#FCEAE5]/90 rounded-[48%_52%_58%_42%/42%_55%_45%_58%] shadow-inner -z-10 bottom-2" />
+
+                {/* Mobile Vector Doodle Charts (SVG Matching Desktop) */}
+                <svg className="absolute inset-0 w-full h-full pointer-events-none z-10" viewBox="0 0 500 625" fill="none">
+                  {/* "GROWTH" / "MOVE" Top-Right Chart */}
+                  <g id="growth-chart-mobile">
+                    <text x="355" y="95" fontFamily="system-ui" fontSize="13" fontWeight="900" fill="#222" letterSpacing="1">GROWTH</text>
+                    <path d="M 435 100 L 475 60" stroke="#F43F5E" strokeWidth="4.5" strokeLinecap="round" />
+                    <path d="M 455 60 L 475 60 L 475 80" stroke="#F43F5E" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
+                    
+                    {/* Upward red line with nodes */}
+                    <path d="M 325 185 L 370 145 L 410 175 L 465 105" stroke="#F43F5E" strokeWidth="3" fill="none" />
+                    <circle cx="370" cy="145" r="5" fill="#222" />
+                    <circle cx="410" cy="175" r="5" fill="#222" />
+                    
+                    {/* Black arrow behind */}
+                    <path d="M 420 195 L 465 140" stroke="#222" strokeWidth="2.5" strokeLinecap="round" />
+                    <path d="M 450 140 L 465 140 L 465 155" stroke="#222" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <text x="380" y="220" fontFamily="system-ui" fontSize="12" fontWeight="800" fill="#333" letterSpacing="1">MOVE</text>
+                  </g>
+
+                  {/* "HIKE" Curved Arrow */}
+                  <g id="hike-arrow-mobile">
+                    <text x="195" y="145" fontFamily="system-ui" fontSize="13" fontWeight="900" fill="#222" letterSpacing="1">HIKE</text>
+                    <path d="M 203 160 Q 195 180 213 175" stroke="#F43F5E" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+                    <path d="M 205 170 L 213 175 L 210 183" stroke="#F43F5E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </g>
+
+                  {/* "SKILLS" Left Chart */}
+                  <g id="skills-chart-mobile">
+                    <path d="M 30 330 L 75 275 L 115 310 L 150 255" stroke="#222" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+                    <path d="M 138 255 L 150 255 L 150 267" stroke="#222" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <circle cx="75" cy="275" r="4.5" fill="#222" />
+                    <circle cx="115" cy="310" r="4.5" fill="#222" />
+
+                    <path d="M 35 385 L 85 320 L 115 360" stroke="#F43F5E" strokeWidth="3.5" fill="none" strokeLinecap="round" />
+                    <circle cx="85" cy="320" r="5" fill="#222" />
+                    <circle cx="115" cy="360" r="5" fill="#222" />
+                    <text x="50" y="398" fontFamily="system-ui" fontSize="13" fontWeight="900" fill="#222" letterSpacing="1">SKILLS</text>
+                  </g>
+                </svg>
 
                 {/* Mobile Bhargavi Cutout */}
-                <div className="relative w-full h-[340px]">
+                <div className="relative w-full h-[350px]">
                   <Image
                     src="/assets/bhargavi-cutout.png"
                     alt="Bhargavi Papolu - Salary Worth & Negotiation Playbook"
@@ -71,7 +111,7 @@ export default function Hero({ onOpenCheckout }: HeroProps) {
                 </div>
 
                 {/* Mobile Signature */}
-                <div className="absolute bottom-6 right-2 font-handwritten text-3xl text-[#FF2A6D] transform -rotate-3 select-none pointer-events-none drop-shadow-xs">
+                <div className="absolute bottom-6 right-2 font-handwritten text-3xl text-[#FF2A6D] transform -rotate-3 select-none pointer-events-none drop-shadow-xs z-20">
                   Bhargavi Papolu
                 </div>
               </div>

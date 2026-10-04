@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Zap, Timer, ArrowRight, ShoppingBag } from "lucide-react";
-import { PRODUCT } from "@/config/product";
 import { useCountdownTimer } from "@/hooks/useCountdownTimer";
 import { trackEvent } from "@/config/analytics";
 
@@ -12,17 +11,6 @@ interface AnnouncementBarProps {
 
 export default function AnnouncementBar({ onOpenCheckout }: AnnouncementBarProps) {
   const { formattedHours, formattedMinutes, formattedSeconds, isMounted } = useCountdownTimer();
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      // Fade out the top cart once user scrolls past 70px
-      setIsScrolled(window.scrollY > 70);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const handleCta = () => {
     trackEvent("pricing_cta_click", { location: "top_announcement_cart" });
@@ -32,11 +20,7 @@ export default function AnnouncementBar({ onOpenCheckout }: AnnouncementBarProps
   return (
     <aside
       aria-label="Limited Time Launch Offer"
-      className={`sticky top-0 z-50 w-full bg-gradient-to-r from-[#0F0F12] via-[#1A1A1F] to-[#0F0F12] text-paper border-b border-white/10 shadow-md transition-all duration-300 ease-in-out ${
-        isScrolled
-          ? "opacity-0 -translate-y-full pointer-events-none"
-          : "opacity-100 translate-y-0 pointer-events-auto py-2 px-3 sm:px-6 text-xs"
-      }`}
+      className="relative z-30 w-full bg-gradient-to-r from-[#0F0F12] via-[#1A1A1F] to-[#0F0F12] text-paper border-b border-white/10 shadow-md py-2 px-3 sm:px-6 text-xs transition-colors duration-200"
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4 w-full">
         {/* Left Side: Offer Badge + Strikethrough Pricing + Live Seconds Countdown */}
@@ -89,7 +73,7 @@ export default function AnnouncementBar({ onOpenCheckout }: AnnouncementBarProps
         <div className="ml-auto shrink-0 flex items-center">
           <button
             onClick={handleCta}
-            className="btn-coral-gradient px-3 sm:px-4 py-1.5 rounded-lg text-[10px] sm:text-xs font-black uppercase tracking-wider shadow-md hover:brightness-110 transition-all inline-flex items-center gap-1.5 group shrink-0"
+            className="btn-coral-gradient px-3 sm:px-4 py-1.5 rounded-lg text-[10px] sm:text-xs font-black uppercase tracking-wider shadow-md hover:brightness-110 transition-all inline-flex items-center gap-1.5 group shrink-0 cursor-pointer"
           >
             <ShoppingBag className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
             <span>Claim ₹299 Deal</span>

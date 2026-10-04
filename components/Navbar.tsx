@@ -13,7 +13,8 @@ export default function Navbar({ onOpenCheckout }: NavbarProps) {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 40);
+      // Small threshold to toggle background blur and border
+      setIsScrolled(window.scrollY > 30);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -28,10 +29,10 @@ export default function Navbar({ onOpenCheckout }: NavbarProps) {
 
   return (
     <header
-      className={`sticky top-0 left-0 right-0 z-40 transition-all duration-300 ${
+      className={`sticky top-0 left-0 right-0 z-40 transition-colors duration-200 py-3 ${
         isScrolled
-          ? "bg-paper/95 backdrop-blur-md border-b border-editorial-border shadow-sm py-2.5"
-          : "bg-paper/90 backdrop-blur-sm border-b border-editorial-border/40 py-3"
+          ? "bg-paper/95 backdrop-blur-md border-b border-editorial-border shadow-sm"
+          : "bg-paper/90 backdrop-blur-sm border-b border-editorial-border/40"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -97,7 +98,7 @@ export default function Navbar({ onOpenCheckout }: NavbarProps) {
           <div className="hidden sm:flex items-center gap-3">
             <button
               onClick={onOpenCheckout}
-              className="btn-coral-gradient px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-md hover:shadow-lg group"
+              className="btn-coral-gradient px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs font-black uppercase tracking-wider flex items-center gap-1.5 shadow-md hover:shadow-lg group cursor-pointer"
             >
               <span>Get The Playbook — ₹299</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -108,13 +109,13 @@ export default function Navbar({ onOpenCheckout }: NavbarProps) {
           <div className="flex sm:hidden items-center gap-2">
             <button
               onClick={onOpenCheckout}
-              className="btn-coral-gradient px-3 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider"
+              className="btn-coral-gradient px-3 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider cursor-pointer"
             >
               ₹299
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-charcoal hover:bg-charcoal/5 transition-colors"
+              className="p-2 rounded-lg text-charcoal hover:bg-charcoal/5 transition-colors cursor-pointer"
               aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -143,7 +144,7 @@ export default function Navbar({ onOpenCheckout }: NavbarProps) {
               setMobileMenuOpen(false);
               onOpenCheckout();
             }}
-            className="w-full btn-coral-gradient py-3 rounded-xl text-sm font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-md"
+            className="w-full btn-coral-gradient py-3 rounded-xl text-sm font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-md cursor-pointer"
           >
             <span>Get The Playbook — ₹299</span>
             <ArrowRight className="w-4 h-4" />
